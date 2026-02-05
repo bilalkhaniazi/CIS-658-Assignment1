@@ -10,16 +10,24 @@ body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     background-attachment: fixed;
     color: #2d3748;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr auto;
-    grid-template-areas: 
-        "header"
-        "main"
-        "footer";
     min-height: 100vh;
     padding: 20px;
+}
+
+/* Container for proper centering */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas: 
+        "header"
+        "nav"
+        "main"
+        "footer";
     gap: 20px;
+    min-height: calc(100vh - 40px);
 }
 
 header {
@@ -50,16 +58,88 @@ header p {
     font-weight: 300;
 }
 
+nav {
+    grid-area: nav;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    gap: 15px;
+}
+
+nav ul li {
+    margin: 0;
+}
+
+nav ul li a {
+    font-size: 1.1em;
+    color: #fff;
+    text-decoration: none;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 14px 28px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    font-weight: 500;
+    display: inline-block;
+}
+
+nav ul li a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+nav ul li a:active {
+    transform: translateY(0);
+}
+
 main {
     grid-area: main;
-    padding: 0;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.sidebar, aside {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.sidebar h2, aside h2 {
+    margin-bottom: 20px;
+}
+
+.sidebar ul, aside ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.sidebar ul li, aside ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar a, aside a {
+    color: #667eea;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.sidebar a:hover, aside a:hover {
+    color: #764ba2;
+    text-decoration: underline;
 }
 
 section {
-    margin-bottom: 25px;
     padding: 35px;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
@@ -101,43 +181,6 @@ p {
     color: #4a5568;
 }
 
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    padding: 0;
-    margin-bottom: 20px;
-    gap: 15px;
-}
-
-nav ul li {
-    margin: 0;
-}
-
-nav ul li a {
-    font-size: 1.1em;
-    color: #fff;
-    text-decoration: none;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 14px 28px;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-    font-weight: 500;
-    display: inline-block;
-}
-
-nav ul li a:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-}
-
-nav ul li a:active {
-    transform: translateY(0);
-}
-
 footer {
     grid-area: footer;
     background: rgba(255, 255, 255, 0.95);
@@ -154,29 +197,27 @@ footer {
 footer p {
     font-size: 1em;
     color: #718096;
+    margin: 0;
 }
 
+/* Tablet and Desktop: Sidebar on left */
 @media (min-width: 768px) {
-    body {
+    .container {
         grid-template-columns: 280px 1fr;
+        grid-template-rows: auto auto 1fr auto;
         grid-template-areas: 
             "header header"
+            "nav nav"
             "sidebar main"
             "footer footer";
         gap: 25px;
     }
 
     .sidebar, aside {
-        grid-area: sidebar;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        padding: 30px;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        height: fit-content;
         position: sticky;
         top: 20px;
+        height: fit-content;
+        align-self: start;
     }
 
     header h1 {
@@ -185,6 +226,10 @@ footer p {
 }
 
 @media (max-width: 767px) {
+    header {
+        padding: 40px 25px;
+    }
+
     header h1 {
         font-size: 2.2em;
     }
@@ -195,12 +240,11 @@ footer p {
 
     nav ul {
         flex-direction: column;
-        align-items: center;
+        align-items: stretch;
     }
 
     nav ul li a {
         width: 100%;
-        max-width: 300px;
         text-align: center;
     }
 }
