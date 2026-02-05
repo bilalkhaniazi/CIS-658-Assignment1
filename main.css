@@ -5,8 +5,10 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.8;
+    background-color: #f4f4f4;
+    color: #333;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto;
@@ -15,7 +17,6 @@ body {
         "main"
         "footer";
     height: 100vh;
-    background-color: #f4f4f4;
 }
 
 header {
@@ -36,7 +37,33 @@ section {
 }
 
 h1, h2 {
-    color: #333;
+    font-family: 'Helvetica', sans-serif;
+    color: #444;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 15px;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav ul li a {
+    font-size: 1.2em;
+    color: #ffffff;
 }
 
 footer {
@@ -45,6 +72,7 @@ footer {
     color: white;
     text-align: center;
     padding: 10px;
+    font-size: 1em;
 }
 
 @media (min-width: 768px) {
